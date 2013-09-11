@@ -8,11 +8,13 @@
 /* Default timer tact period */
 atomic_t tact = ATOMIC_INIT(5000);
 
-/* Timer structure */
-static struct timer_list sos_timer;
 
 /* Kobject structure */
 static struct kobject * kobj;
+
+/* Timer structure */
+static struct timer_list sos_timer;
+
 
 /* Shows the current timer frequency in milliseconds. */
 static ssize_t file_show(struct kobject *kobj, struct kobj_attribute *attr, char *buf);
@@ -25,12 +27,12 @@ static struct kobj_attribute sos_attr =
   __ATTR(sos, 0666,
 	file_show, file_store);
 
-/* Attrs structures array */
+/* Attrributes structures array */
 static struct attribute *attrs[] = {
 	&sos_attr.attr, NULL
 };
 
-/* Attributes group. */
+/* Attributes group */
 static struct attribute_group attr_group = {
 	.attrs = attrs,
 };
@@ -104,8 +106,9 @@ static void __exit timer_exit(void)
 	printk(KERN_INFO "Timer module uninstalled success!\n");
 }
 
-MODULE_LICENSE("GPL");
 MODULE_AUTHOR("A&A");
+MODULE_LICENSE("GPL");
+
 
 module_init(timer_init); /* Register module entry point */
 module_exit(timer_exit); /* Register module cleaning up */
